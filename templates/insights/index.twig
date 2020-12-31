@@ -29,7 +29,7 @@
                             <div class="w-full p-6 border border-t-0 rounded-b">
                                 <ul>
                                 {% for category in entry.insightCategory.all() %}
-                                    <li class="font-bold text-xs mb-2 text-grey text-bold">{{ category.title }}</li>
+                                    <li class="font-bold text-xs mb-2 text-primary text-bold">{{ category.title }}</li>
                                 {% endfor %}
                                 </ul>
                                 <h2 class="text-secondary font-display text-xl font-bold mb-2">{% if entry.pageTitle|length %}{{ entry.pageTitle }}{% else %}{{ entry.title }}{% endif %}</h2>

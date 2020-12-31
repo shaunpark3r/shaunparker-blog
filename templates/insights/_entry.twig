@@ -7,7 +7,7 @@
       <div class="px-4 lg:px-0 mt-8 flex flex-col justify-end mx-auto items-baseline">
         <ul class="lg:w-1/2 mx-auto mb-5">
         {% for category in entry.insightCategory %}
-          <li class="inline-block mr-2"><a href="{{ category.url }}" class="uppercase font-bold">{{ category.title }}</a></li>
+          <li class="inline-block mr-2"><a href="{{ category.url }}" class="uppercase font-bold text-primary">{{ category.title }}</a></li>
         {% endfor %}
         </ul>
         {#<a href="/insights" class="bg-secondary text-white text-xs py-1 px-4 rounded-full inline-flex items-center">
