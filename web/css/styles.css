@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.blog-item {
+    overflow: hidden;
+}
+
+.blog-item img {
+    transition: transform .5s ease;
+}
+
+.blog-item:hover img {
+    transform: scale(1.5);
+}

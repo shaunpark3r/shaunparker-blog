@@ -1,0 +1,40 @@
+fieldLayouts:
+  e5ef4bb6-e8ef-4524-956b-79f83864acd1:
+    tabs:
+      -
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            disabled: false
+            id: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\TitleField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+handle: insightsCategory
+name: 'Insights Category'
+siteSettings:
+  9d163d3e-5e8b-443f-8a10-0bfb4d64e698:
+    hasUrls: true
+    template: insights/_category
+    uriFormat: 'insights/{slug}'
+structure:
+  maxLevels: null
+  uid: ab512069-993e-48a4-81fc-80f9200b166d

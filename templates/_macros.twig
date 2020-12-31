@@ -1,0 +1,87 @@
+
+{% macro image( file, transform, default_alt_text, class ) -%}
+	<img{% if class is not null %} class="{{ class }}"{% endif %} src="{{ file.getUrl( transform ) }}" width="{{ file.getWidth( transform ) }}" height="{{ file.getHeight( transform ) }}" alt="{{ file.altText ?? default_alt_text }}">
+{%- endmacro %}
+
+{% macro imagePlaceholder( width, height, class ) -%}
+	{%- set hex = ['aa','bb','cc','dd','ee'] -%}
+	{%- set random_colour = random( hex ) ~ random( hex ) ~ random( hex ) -%}
+	<img{% if class is not null %} class="{{ class }}"{% endif %} src="https://tools.ten4dev.com/placeholder/{{ width }}-{{ height }}-{{ random_colour }}" width="{{ width }}" height="{{ height }}" alt="Placeholder">
+{%- endmacro %}
+
+{#
+	The first transform will be used as the fallback src image.
+	Use `sizes` to tell the browser how much space the image takes up at
+	different media queries, i.e.
+	"(min-width: 400px) 100vw, (min-width: 700px) 50vw, 33vw"
+	http://ericportis.com/posts/2014/srcset-sizes/
+#}
+{% macro imageSet( file, transforms, sizes, default_alt_text, class ) -%}
+	<img{% if class is not null %} class="{{ class }}"{% endif %}
+		src="{{ file.getUrl( transforms[0] ) }}"
+		srcset="
+			{%- for size in transforms -%}
+				{{ file.getUrl( size ) ~ ' ' ~ file.getWidth( size ) ~ 'w' ~ ( not loop.last ? ', ') }}
+			{%- endfor -%}
+		"
+		sizes="{{ sizes }}"
+		width="{{ file.getWidth( transforms[0] ) }}"
+		height="{{ file.getHeight( transforms[0] ) }}"
+		alt="{{ file.altText ?? default_alt_text }}">
+{%- endmacro %}
+
+{% macro shareLinks( url, text ) -%}
+	<ul class="social-share">
+		<li><a class="js-social-share-popup icon icon--facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ url }}" target="_blank"></a></li>
+		<li><a class="js-social-share-popup icon icon--twitter" href="https://twitter.com/share?text={{ text|e( 'url' ) }}&amp;url={{ url }}" target="_blank"></a></li>
+		<li><a class="js-social-share-popup icon icon--linkedin" href="http://www.linkedin.com/shareArticle?url={{ url }}" target="_blank"></a></li>
+		<li><a class="icon icon--mail" href="mailto:?subject={{ text|e( 'url' ) }}&body={{ url|e( 'url' ) }}"></a></li>
+	</ul>
+{%- endmacro %}
+
+{% macro vimeoVideo( id, zoomy = false ) -%}
+	{%- set iframe_src = 'https://player.vimeo.com/video/' ~ id ~ '?autoplay=1&loop=1&color=26337b&title=0&byline=0&portrait=0&background=1' %}
+	<div class="{{ zoomy ? 'zoomy-flex-container' : 'flex-container' }}" data-lazy-iframe="{{ iframe_src }}">
+		<noscript>
+			<iframe src="{{ iframe_src }}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+		</noscript>
+	</div>
+{%- endmacro %}
+
+{% macro pagination( paginate, query_object ) -%}
+	<ul class="pagination">
+		{% if paginate.prevUrl %}
+			<li><a href="{{ url( paginate.prevUrl, query_object ) }}">Previous</a></li>
+		{% endif %}
+		{% if paginate.currentPage > 4 %}
+			<li><a href="{{ url( paginate.firstUrl, query_object ) }}">1</a></li>
+			<li>…</li>
+		{% endif %}
+		{% for page, url in paginate.getPrevUrls( 3 ) %}
+			<li><a href="{{ url( url, query_object ) }}">{{ page }}</a></li>
+		{% endfor %}
+		<li><span>{{ paginate.currentPage }}</span></li>
+		{% for page, url in paginate.getNextUrls( 3 ) %}
+			<li><a href="{{ url( url, query_object ) }}">{{ page }}</a></li>
+		{% endfor %}
+		{% if paginate.currentPage < ( paginate.totalPages - 3 ) %}
+			<li>…</li>
+			<li><a href="{{ url( paginate.lastUrl, query_object ) }}">{{ paginate.totalPages }}</a></li>
+		{% endif %}
+		{% if paginate.nextUrl %}
+			<li><a href="{{ url( paginate.nextUrl, query_object ) }}">Next</a></li>
+		{% endif %}
+	</ul>
+{%- endmacro %}
+
+{%- macro errorList( errors ) -%}
+	{%- if errors -%}
+		<ul class="form-errors">
+			{%- for error in errors -%}
+				<li>{{ error }}</li>
+			{%- endfor -%}
+		</ul>
+	{%- endif -%}
+{%- endmacro -%}
+
+

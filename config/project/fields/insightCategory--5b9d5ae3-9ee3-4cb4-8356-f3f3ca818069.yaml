@@ -1,0 +1,23 @@
+contentColumnType: string
+fieldGroup: d19d3240-1b50-4de3-9938-2a3ead6cc468
+handle: insightCategory
+instructions: ''
+name: 'Insight Category'
+searchable: false
+settings:
+  allowLimit: false
+  allowMultipleSources: false
+  allowSelfRelations: false
+  branchLimit: ''
+  limit: null
+  localizeRelations: false
+  selectionLabel: ''
+  showSiteMenu: false
+  source: 'group:91247896-f3cf-4df1-b797-77c2be42453d'
+  sources: '*'
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: null
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Categories
